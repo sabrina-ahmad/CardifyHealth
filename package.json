@@ -3,6 +3,7 @@
     "private": true,
     "type": "module",
     "scripts": {
+        "vercel-build": "curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && composer install --no-dev --optimize-autoloader && npm install && npm run build",
         "build": "vite build",
         "dev": "vite"
     },
