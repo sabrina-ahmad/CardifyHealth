@@ -2,15 +2,20 @@
 
 namespace App\Models;
 
+use MongoDB\Laravel\Eloquent\Model;
+use MongoDB\Laravel\Eloquent\Factories\HasFactory;
+use MongoDB\Laravel\Auth\User as Authenticatable;
+use MongoDB\Laravel\Eloquent\DocumentModel;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+// use Illuminate\Database\Eloquent\Factories\HasFactory;
+// use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    // use HasFactory, Notifiable;
+    use DocumentModel, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -18,9 +23,11 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'fullname',
+        'username',
         'email',
         'password',
+        'role',
     ];
 
     /**
