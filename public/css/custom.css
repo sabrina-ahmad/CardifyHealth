@@ -1,0 +1,84 @@
+.bg-light-blue {
+    /* background-color: lightblue; */
+    background-color: #eaf4fd;
+}
+
+.glassy {
+    background: rgba(255, 255, 255, 0.08);
+    /* transparent */
+    backdrop-filter: blur(12px);
+    /* blur effect */
+    -webkit-backdrop-filter: blur(52px);
+    /* Safari */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.patient-card {
+    max-width: 400px;
+    border-radius: 1rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    background: #fff;
+    padding: 1.5rem;
+}
+
+.patient-avatar {
+    width: 50px;
+    height: 50px;
+    background: #007bff;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.status-badge {
+    background: #28a745;
+    color: white;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+}
+
+.qr-placeholder {
+    width: 50px;
+    height: 50px;
+    background: #f0f4ff;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #007bff;
+}
+
+/* 
+.bg-gradient-primary {
+    background-color: #24a6df;
+} */
+
+.btn-gradient-primary {
+    background-image: linear-gradient(45deg,
+            var(--bs-primary),
+            var(--bs-info));
+    color: #fff;
+    border: none;
+}
+
+.text-gradient-primary {
+    color: linear-gradient(45deg,
+            var(--bs-primary),
+            var(--bs-info));
+}
+
+.gradient-success {
+    background: linear-gradient(90deg, #10b981, #14b8a6);
+    color: #fff;
+    border: none;
+}
+
+.gradient-success:hover {
+    background: linear-gradient(90deg, #059669, #0d9488);
+}
