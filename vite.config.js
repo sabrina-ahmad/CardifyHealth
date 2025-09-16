@@ -8,6 +8,11 @@ export default defineConfig({
             input: ['resources/sass/app.css', 'resources/js/app.js'],
             refresh: true,
         }),
-        tailwindcss(),
+        // tailwindcss(),
     ],
+    resolve: {
+        alias: {
+            "~bootstrap": path.resolve(__dirname, "node_modules/bootstrap"),
+        },
+    },
 });
