@@ -1,4 +1,4 @@
-function showToast(message, type = "info", timmer = 3000) {
+function showToast(message, type = "info", timmer = 5000) {
     let container = document.querySelector("#notifyContainer");
 
     let notify = document.createElement("div");
@@ -15,7 +15,7 @@ function showToast(message, type = "info", timmer = 3000) {
 }
 
 
-function showNotify(message, type = "info", timer = 3000) {
+function showNotify(message, type = "info", timer = 5000) {
     let container = document.querySelector("#notifyContainer");
 
     let notify = document.createElement("div");
