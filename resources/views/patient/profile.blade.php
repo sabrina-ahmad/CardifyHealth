@@ -125,7 +125,7 @@
                                     </svg></a>
                             </li>
                             <li class="nav-item">
-                                <a href="#billing" data-s-toggle="tab" class="nav-link has-icon"><svg
+                                <a href="#billing" data-bs-toggle="tab" class="nav-link has-icon"><svg
                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                         stroke-linecap="round" stroke-linejoin="round"
@@ -134,6 +134,16 @@
                                             ry="2"></rect>
                                         <line x1="1" y1="10" x2="23" y2="10"></line>
                                     </svg></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#digitalCard" data-bs-toggle="tab" class="nav-link has-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        fill="currentColor" class="bi bi-person-vcard-fill mr-2 mx-1"
+                                        viewBox="0 0 16 16">
+                                        <path
+                                            d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm9 1.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4a.5.5 0 0 0-.5.5M9 8a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4A.5.5 0 0 0 9 8m1 2.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5m-1 2C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 0 2 13h6.96q.04-.245.04-.5M7 6a2 2 0 1 0-4 0 2 2 0 0 0 4 0" />
+                                    </svg>
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -429,15 +439,15 @@
                                                 <div class="patient-avatar">{{ $initials }}</div>
                                             @endif
                                             <div class="ms-3">
-                                                    @php
+                                                @php
                                                     $dateOfBirth = $user->dob;
                                                     $age = \Carbon\Carbon::parse($dateOfBirth)->age;
-                                                    @endphp
+                                                @endphp
                                                 <h6 class="mb-0 fw-bold">{{ $user->fullname }}</h6>
                                                 <small class="text-muted">Age: {{ $age }}</small><br>
-                                                <small class="text-muted"><i class="bi bi-geo-alt me-1"></i> St.
-                                                    Mary’s
-                                                    Hospital</small>
+                                                <!-- <small class="text-muted"><i class="bi bi-geo-alt me-1"></i> St. -->
+                                                <!--     Mary’s -->
+                                                <!--     Hospital</small> -->
                                             </div>
                                         </div>
 

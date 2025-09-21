@@ -77,7 +77,7 @@ class AppointmentController extends Controller
             'status' => 'pending',  // Default status if not provided
         ]);
 
-        return redirect()->route('appointments.create')->with('success', 'Appointment successfully created!');
+        return redirect()->route('dashboard')->with('success', 'Appointment successfully created!');
     }
 
     public function show($id)
