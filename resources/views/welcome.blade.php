@@ -309,7 +309,7 @@
 
                 <!-- Admin Dashboard -->
                 <div class="dashboard-section">
-                    <h5>🛡️ Admin Dashboard</h5>
+                    <h5><i class="bi bi-shield-fill text-primary"></i> Admin Dashboard</h5>
                     <div class="row g-3">
                         <div class="col-md-4">
                             <div class="card p-3">
@@ -337,7 +337,7 @@
 
                 <!-- Hospital Dashboard -->
                 <div class="dashboard-section">
-                    <h5>🏥 Hospital Dashboard</h5>
+                    <h5><i class="bi bi-hospital-fill text-primary"></i> Hospital Dashboard</h5>
                     <div class="row g-3">
                         <div class="col-md-3">
                             <div class="card p-3">
@@ -372,7 +372,7 @@
 
                 <!-- Patient Dashboard -->
                 <div class="dashboard-section">
-                    <h5>👤 Patient Dashboard</h5>
+                    <h5><i class="bi bi-person-fill text-primary"></i> Patient Dashboard</h5>
                     <div class="row g-3">
                         <div class="col-md-6">
                             <div class="card p-3">
