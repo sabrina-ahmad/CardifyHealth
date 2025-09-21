@@ -22,8 +22,8 @@
 }
 
 .patient-avatar {
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
     background: #007bff;
     color: white;
     display: flex;
@@ -54,23 +54,19 @@
     color: #007bff;
 }
 
-/* 
+/*
 .bg-gradient-primary {
     background-color: #24a6df;
 } */
 
 .btn-gradient-primary {
-    background-image: linear-gradient(45deg,
-            var(--bs-primary),
-            var(--bs-info));
+    background-image: linear-gradient(45deg, var(--bs-primary), var(--bs-info));
     color: #fff;
     border: none;
 }
 
 .text-gradient-primary {
-    color: linear-gradient(45deg,
-            var(--bs-primary),
-            var(--bs-info));
+    color: linear-gradient(45deg, var(--bs-primary), var(--bs-info));
 }
 
 .gradient-success {
@@ -81,4 +77,171 @@
 
 .gradient-success:hover {
     background: linear-gradient(90deg, #059669, #0d9488);
+}
+
+/* In resources/css/app.css */
+.card {
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+.badge.bg-warning {
+    background-color: #ffc107 !important;
+}
+
+.badge.bg-success {
+    background-color: #28a745 !important;
+}
+
+.badge.bg-danger {
+    background-color: #dc3545 !important;
+}
+
+.card {
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-section {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.dashboard-section h5 {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.value {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.value.text-success {
+    color: #16a34a !important;
+    /* Tailwind-like green */
+}
+
+.value.text-info {
+    color: #0ea5e9 !important;
+}
+
+.status-badge {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 1rem;
+}
+
+.notify-container {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.notify {
+    margin-top: 10px;
+    padding: 12px 18px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 14px;
+    opacity: 0.9;
+    animation:
+        fadeIn 0.5s,
+        fadeOut 0.5s 2.5s;
+}
+
+.notify-success {
+    background: #28a745;
+}
+
+.notify-error {
+    background: #dc3545;
+}
+
+.notify-info {
+    background: #007bff;
+}
+
+.tooltips {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.tooltips .tooltiptext {
+    visibility: hidden;
+    text-align: center;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: -100%;
+    right: 0%;
+    background-color: whitesmoke;
+    color: #121212;
+    /* top: 20%; */
+}
+
+.tooltips:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 0.9;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 0.9;
+        transform: translateY(0px);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+.content-section {
+    display: none;
+}
+
+.content-section.active {
+    display: block;
+}
+
+.scheduler_default_event_inner {
+    padding: 8px !important;
+}
+
+.scheduler_default_event_inner:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.scheduler_timeline {
+    font-size: 14px !important;
+}
+
+.scheduler_timeheader {
+    font-weight: bold !important;
+}
+
+@media (max-width: 768px) {
+    .row>div {
+        margin-bottom: 1rem;
+    }
 }

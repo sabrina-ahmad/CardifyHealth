@@ -31,7 +31,9 @@ return new class extends Migration
         });
 
         Schema::table('hospitals', function (Blueprint $table) {
-            $table->rememberToken()->after('password');
+            $table->after('password', function (Blueprint $table) {
+                $table->rememberToken();
+            });
         });
     }
 

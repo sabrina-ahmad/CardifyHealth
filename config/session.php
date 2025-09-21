@@ -20,6 +20,17 @@ return [
 
     'driver' => env('SESSION_DRIVER', 'database'),
 
+    'providers' => [
+        /*
+     * Package Service Providers...
+     */
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+    ],
+
+    'aliases' => [
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Session Lifetime
@@ -129,7 +140,7 @@ return [
 
     'cookie' => env(
         'SESSION_COOKIE',
-        Str::slug(env('APP_NAME', 'laravel')).'-session'
+        Str::slug(env('APP_NAME', 'laravel')) . '-session'
     ),
 
     /*

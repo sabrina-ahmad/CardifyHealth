@@ -10,9 +10,12 @@ class AdminDashboardController extends Controller
 {
     public function index()
     {
-        $unverifiedHospitals = Hospital::whereNull('email_verified_at')->get();
+        // $unverifiedHospitals = Hospital::whereNull('email_verified_at')->get();
 
-        return view('admin.dashboard', compact('unverifiedHospitals'));
+        $hospitals = Hospital::where('status', 'pending')->get();
+
+        return view('admin.dashboard', compact('hospitals'));
+        // return view('admin.dashboard', compact('unverifiedHospitals'));
     }
 
     public function loadPage($page)

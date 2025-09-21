@@ -1,6 +1,6 @@
 <x-layout>
     <main class="d-flex flex-column z-2 position-relative">
-        <section class="mt-3 vh-70 bg-light-blue">
+        <section class="vh-70 bg-light-blue">
             <div class="container mt-5 row align-items-center">
                 <div class="col-lg-6 mx-auto">
                     <h1 class="display-4 fw-bold text-primary">Cardify Health</h1>
@@ -11,7 +11,8 @@
                         you find the right doctor closest to you.
                     </p>
                     <div class="mt-5 mb-5">
-                        <button type="button" class="btn btn-primary btn-lg px-4 me-sm-3">Get Started</button>
+                        <a href="{{ route('register') }}" class="btn btn-primary btn-lg px-4 me-sm-3">Get Started</a>
+                        <a href="#Demo" class="btn btn-light btn-lg px-4 me-sm-3">Watch Demo</a>
                     </div>
                 </div>
 
@@ -36,14 +37,15 @@
                 </div>
             </div>
         </section>
-        <section class="bg-light py-5">
+        <section class=" bg-light py-5">
+
             <h2 class="text-center fw-bold">Powerful Features for Modern Healthcare</h2>
             <p class="text-center text-body-tertiary fw-medium">
                 Everything you need to manage healthcare operations efficiently and securely
             </p>
 
             <div class="row gap-2 justify-content-center mx-sm-5">
-                <div class="card col-lg-3 col-md-5 col-sm-10  border-info shadow">
+                <div class="card col-lg-3 col-md-3 col-sm-10  border-info shadow">
                     <div class="card-body my-3">
                         <span class=" text-light btn-gradient-primary py-3 px-3 text-start rounded-3">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
@@ -59,14 +61,10 @@
 
                     </div>
                 </div>
-                <div class="card col-lg-3 col-md-5 col-sm-12 border-info shadow">
+                <div class="card col-lg-3 col-md-3 col-sm-12 border-info shadow">
                     <div class="card-body my-3">
                         <span class=" text-light btn-gradient-primary py-3 px-3 text-start rounded-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                                class="bi bi-activity" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd"
-                                    d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2" />
-                            </svg>
+                            <i class="bi bi-activity"></i>
                         </span>
                         <h5 class="card-title mt-3">Real-Time Dashboards</h5>
                         <p class="card-text text-body-secondary">Comprehensive dashboards with key metrics and activity
@@ -75,7 +73,7 @@
 
                     </div>
                 </div>
-                <div class="card col-lg-3 col-md-5 col-sm-12  border-info shadow">
+                <div class="card col-lg-3 col-md-3 col-sm-12  border-info shadow">
                     <div class="card-body my-3">
                         <span class=" text-light btn-gradient-primary py-3 px-3 text-start rounded-3">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
@@ -97,7 +95,7 @@
                     </div>
                 </div>
 
-                <div class="card col-lg-3 col-md-5 col-sm-12  border-info shadow">
+                <div class="card col-lg-3 col-md-3 col-sm-12  border-info shadow">
                     <div class="card-body my-3">
                         <span class=" text-light btn-gradient-primary py-3 px-3 text-start rounded-3">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
@@ -113,7 +111,7 @@
                     </div>
                 </div>
 
-                <div class="card col-lg-3 col-md-5 col-sm-12  border-info shadow">
+                <div class="card col-lg-3 col-md-3 col-sm-12  border-info shadow">
                     <div class="card-body my-3">
                         <span class=" text-light btn-gradient-primary py-3 px-3 text-start rounded-3">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
@@ -130,7 +128,7 @@
                     </div>
                 </div>
 
-                <div class="card col-lg-3 col-md-5 col-sm-12  border-info shadow">
+                <div class="card col-lg-3 col-md-3 col-sm-12  border-info shadow">
                     <div class="card-body my-3">
                         <span class=" text-light btn-gradient-primary py-3 px-3 text-start rounded-3">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
@@ -212,8 +210,8 @@
                 </div>
 
             </div>
+            <div id="Demo"></div>
         </section>
-
         <section class="bg-light p-5">
             <div class="row justify-content-center  ">
                 <div class="col-lg-6 col-sm-12">
@@ -260,7 +258,7 @@
 
                 </div>
                 <div class="col-lg-4 col-sm-12">
-                    <div class="patient-card">
+                    <div class="patient-card card">
                         <!-- Header -->
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h6 class="mb-0 text-primary fw-semibold">
@@ -299,7 +297,127 @@
             </div>
         </section>
 
+
+        <section class="bg-white p-5">
+            <div class="row justify-content-center ">
+                <div class="col-lg-6 col-sm-12">
+                    <h2 class=" fw-bold text-center">Powerful Dashboards for Every Role</h2>
+                    <p class="text-body-tertiary fw-medium text-center">Comprehensive analytics and management tools
+                        tailored for
+                        each user type</p>
+                </div>
+
+                <!-- Admin Dashboard -->
+                <div class="dashboard-section">
+                    <h5>🛡️ Admin Dashboard</h5>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="card p-3">
+                                <h6>Pending Hospitals</h6>
+                                <div class="value text-info">12</div>
+                                <small class="text-muted">Awaiting approval</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card p-3">
+                                <h6>Approved Today</h6>
+                                <div class="value text-success">8</div>
+                                <small class="text-muted">+15% from yesterday</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card p-3">
+                                <h6>System Health</h6>
+                                <div class="value text-success">99.9%</div>
+                                <small class="text-muted">Uptime</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hospital Dashboard -->
+                <div class="dashboard-section">
+                    <h5>🏥 Hospital Dashboard</h5>
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <div class="card p-3">
+                                <h6>Active Doctors</h6>
+                                <div class="value text-info">24</div>
+                                <small class="text-muted">+2 this week</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card p-3">
+                                <h6>Today's Appointments</h6>
+                                <div class="value text-info">156</div>
+                                <small class="text-muted">89% attended</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card p-3">
+                                <h6>Active Patients</h6>
+                                <div class="value text-success">1,234</div>
+                                <small class="text-muted">+45 this month</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card p-3">
+                                <h6>Revenue</h6>
+                                <div class="value text-success">$45.2K</div>
+                                <small class="text-muted">+12% vs last month</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Patient Dashboard -->
+                <div class="dashboard-section">
+                    <h5>👤 Patient Dashboard</h5>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="card p-3">
+                                <div class="d-flex justify-content-between">
+                                    <h6>Upcoming Appointments</h6>
+                                    <span class="badge bg-secondary rounded-pill">3</span>
+                                </div>
+                                <div class="mt-3">
+                                    <strong>Dr. Sarah Johnson</strong>
+                                    <p class="mb-1 text-muted">Cardiology</p>
+                                    <small class="text-muted">Tomorrow · 2:30 PM</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card p-3">
+                                <div class="d-flex justify-content-between">
+                                    <h6>Medical Records</h6>
+                                    <button class="btn btn-outline-secondary btn-sm">Export</button>
+                                </div>
+                                <ul class="list-unstyled mt-3 mb-0">
+                                    <li>Last Checkup <span class="text-muted float-end">Dec 15, 2023</span></li>
+                                    <li>Blood Pressure <span class="badge bg-info status-badge float-end">Normal</span>
+                                    </li>
+                                    <li>Weight <span class="text-muted float-end">165 lbs</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section class="btn-gradient-primary p-5">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-6 col-sm-12 text-center">
+                    <h2 class=" fw-bold">Powerful Dashboards for Every Role</h2>
+                    <p class="text-body-tertiary fw-medium">Join leading healthcare providers who trust Cardify Health
+                        for secure, efficient patient and hospital management.</p>
+                    <a class="btn btn-outline-light btn-sm " href="#Demo" role="button">Demo</a>
+                    <a class="btn btn-outline-light btn-sm " href="#btn" role="button"> Schedule Demo</a>
+                </div>
+            </div>
+        </section>
+
+
     </main>
-
-
 </x-layout>

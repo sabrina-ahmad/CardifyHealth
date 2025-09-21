@@ -1,11 +1,11 @@
 <x-layout>
 
-    <div class="container-fluid min-vh-100 d-flex bg-light-blue">
+    <div class="container-fluid mt-2 min-vh-100 d-flex">
         <div class="row w-100">
 
             <!-- LEFT: Hero Section -->
             <div
-                class="col-lg-6 d-none d-lg-flex flex-column justify-content-center align-items-center text-white bg-primary p-5">
+                class="col-lg-6 col-sm-12 col-md-6  d-lg-flex flex-column justify-content-center align-items-center text-white bg-primary p-5">
                 <div class="text-center">
                     <h1 class="display-5 fw-bold">Welcome to Cardify Health</h1>
                     <p class="lead mt-3">

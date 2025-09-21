@@ -25,10 +25,13 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('phone_number');
             $table->enum('role', ['patient', 'doctor', 'admin'])->default('patient'); // role-based
             $table->foreignId('hospital_id')->nullable()
                 ->constrained("hospitals")
                 ->onDelete('cascade'); // if doctor
+            $table->date('dob')->nullable(); // Date of Birth
+            $table->string('profile_image')->nullable(); // Image path or URL
             $table->timestamps();
             $table->rememberToken();
         });

@@ -9,8 +9,14 @@ class HospitalApprovalController extends Controller
 {
     public function index()
     {
+        $hospitals = Hospital::all();
+        return view('admin.hospitals', compact('hospitals'));
+    }
+
+    public function pending()
+    {
         $hospitals = Hospital::where('status', 'pending')->get();
-        return view('admin.hospitals.waitlist', compact('hospitals'));
+        return view('admin.waitlist', compact('hospitals'));
     }
 
     public function approve($id)

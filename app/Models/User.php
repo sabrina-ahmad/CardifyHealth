@@ -26,8 +26,11 @@ class User extends Authenticatable
         'fullname',
         'username',
         'email',
+        'phone_number',
         'password',
         'role',
+        'dob',
+        'profile_image',
     ];
 
     /**
@@ -39,6 +42,8 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    protected $dates = ['dob'];
 
     /**
      * Get the attributes that should be cast.
