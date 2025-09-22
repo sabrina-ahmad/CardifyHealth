@@ -110,6 +110,6 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/')->with('info', 'Logout complete. See you next time!');
     }
 }
