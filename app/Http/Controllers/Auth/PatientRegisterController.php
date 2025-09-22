@@ -72,4 +72,47 @@ class PatientRegisterController extends Controller
 
         return redirect()->back()->with('success', 'Profile updated successfully!');
     }
+
+    public function updateUsername(Request $request)
+    {
+
+        $validated = $request->validate([
+            'username' => 'nullable|string|max:255|unique:users,username,' . auth()->id()
+        ]);
+
+        $user = auth()->user(); // Get the authenticated user
+
+        $existingUsername = User::where('username', $validated['username'])->exists();
+        $User = User::findOrFail($user->id);
+
+        if ($validated['username'] == $User->username) {
+            return back()->with('warning', 'Nothing updated!');
+        }
+
+        if ($existingUsername) {
+            return back()->with('error', 'User is already exists try another one!');
+        }
+
+        $user->username = $request->input('username');
+        $user->save();
+
+        return back()->with('success', 'Profile updated successfully!');
+    }
+
+    public function destroy()
+    {
+        $id = auth()->user()->id;
+
+        $patient = User::findOrFail($id);
+
+        $existsPatient = User::where('id', $patient->id)->exists();
+
+        if ($existsPatient) {
+            $patient->delete();
+        } else {
+            return redirect('/')->with('error', 'Attempted to delete unauthorized account!');
+        }
+
+        return redirect('/')->with('info', 'Account deleted successfully!');
+    }
 }
