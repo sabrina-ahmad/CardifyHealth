@@ -11,7 +11,7 @@ use MongoDB\Laravel\Eloquent\DocumentModel;
 // use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-
+use MongoDB\Laravel\Relations\BelongsTo;
 
 // class Hospital extends Model
 class Hospital extends Authenticatable
@@ -32,6 +32,9 @@ class Hospital extends Authenticatable
         'address',
         "first_time",
         'status',
+        'department_count',
+        'appointment_count',
+        'doctor_count'
     ];
 
     protected $hidden = [
@@ -42,4 +45,19 @@ class Hospital extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function appointments()
+    {
+        return $this->hasMany(Appointment::class);
+    }
+
+    public function department()
+    {
+        return $this->hasMany(Department::class);
+    }
+
+    public function doctor()
+    {
+        return $this->hasMany(Doctor::class);
+    }
 }
