@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout :title="'Profile'">
 
     <div class="container py-5">
 
@@ -234,14 +234,19 @@
                         <div class="tab-pane" id="account">
                             <h6>ACCOUNT SETTINGS</h6>
                             <hr>
-                            <form>
+                            <form action="{{ route('patient.updateUsername') }}" method="post">
+                                @csrf
+                                @method('PUT')
                                 <div class="form-group">
                                     <label for="username">Username</label>
-                                    <input type="text" class="form-control" id="username"
+                                    <input type="text" name="username" class="form-control" id="username"
                                         aria-describedby="usernameHelp" placeholder="Enter your username"
-                                        value="kennethvaldez">
+                                        value="{{ $user->username }}">
                                     <small id="usernameHelp" class="form-text text-muted">After changing your
                                         username, your old username becomes available for anyone else to claim.</small>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Change</button>
                                 </div>
                                 <hr>
                                 <div class="form-group">
@@ -249,7 +254,11 @@
                                     <p class="text-muted font-size-sm">Once you delete your account, there is no going
                                         back. Please be certain.</p>
                                 </div>
-                                <button class="btn btn-danger" type="button">Delete Account</button>
+                            </form>
+                                <form action="{{ route('patient.delete') }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger" type="submit">Delete Account</button>
                             </form>
                         </div>
                         <div class="tab-pane" id="security">
@@ -513,7 +522,27 @@
         <div class="notify-container" id="notifyContainer">
         </div>
         <script>
-            showToast("{{ session('success') }}", "info")
+            // showToast("{{ session('success') }}", "info")
+            showNotify("<i class='bi bi-check-circle-fill text-white'></i> <span class='text-white'>{{session('success')}}<span>", 'info', 5000)
+        </script>
+    @endif
+
+
+    @if (session('error'))
+        <div class="notify-container" id="notifyContainer">
+        </div>
+        <script>
+            // showToast("{{ session('error') }}", "error")
+            showNotify("<i class='bi bi-x-circle text-dark'></i> <span class='text-dark'>{{session('error')}}<span>", 'error', 5000)
+        </script>
+    @endif
+
+    @if (session('warning'))
+        <div class="notify-container" id="notifyContainer">
+        </div>
+        <script>
+            // showToast("{{ session('warning') }}", "warning")
+            showNotify("<i class='bi bi-exclamation-circle-fill text-dark'></i> <span class='text-dark'>{{session('warning')}}<span>", 'warning', 5000)
         </script>
     @endif
 
