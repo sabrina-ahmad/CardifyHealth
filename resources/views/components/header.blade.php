@@ -15,7 +15,8 @@
                 <a class="navbar-brand text-primary" href="/">Cardify Health</a>
             @else
                 <div class="col">
-                    <a class="navbar-brand text-primary m-0 p-0" href="#">Wellcome, {{ $authUser->fullname }}</a>
+                    <a class="navbar-brand text-primary m-0 p-0" href="{{ route('welcome') }}">Wellcome,
+                        {{ $authUser->fullname }}</a>
                     @if ($authUser->role == 'patient')
                         <p class="m-0 p-0 text-success">Role: {{ $authUser->role }}</p>
                     @else
@@ -36,8 +37,8 @@
                         @guest
                             <a class="nav-link {{ request()->is('/') ? 'active fw-bold text-primary' : '' }}"
                                 href="/">Home</a>
-                            <a class="nav-link {{ request()->is('service') ? 'active fw-bold text-primary' : '' }}"
-                                href="/service">Service</a>
+                            <a class="nav-link {{ request()->is('FAQs') ? 'active fw-bold text-primary' : '' }}"
+                                href="/FAQs">FAQs</a>
                             <a class="nav-link {{ request()->is('#Demo') ? 'active fw-bold text-primary' : '' }}"
                                 href="#Demo">Demo</a>
                             <a class="nav-link {{ request()->is('about') ? 'active fw-bold text-primary' : '' }}"
