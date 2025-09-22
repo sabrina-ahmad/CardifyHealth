@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Appointment;
 use App\Models\Doctor;
 use App\Models\Department;
+use App\Models\Hospital;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -12,27 +13,12 @@ class AppointmentController extends Controller
 {
     public function index()
     {
-        // $appointments = auth()->user()->appointments()
-        //     ->with('doctor.department')
-        //     ->orderBy('date_time', 'desc')
-        //     ->get();
 
-        return "welcom";
-        // return view('appointments.create', compact('appointments'));
+        $hospital_id = request()->get('hospital_id');
+        $hospital = Hospital::findOrFail($hospital_id);
+
+        return view("appointments.index", compact('hospital'));
     }
-
-    // public function create()
-    // {
-    //     $departments = Department::all();
-    //     $doctors = Doctor::with('department')
-    //         ->whereDoesntHave('appointments', function ($query) {
-    //             $query->where('status', 'pending')
-    //                 ->whereDate('date_time', Carbon::today());
-    //         })
-    //         ->get();
-    //
-    //     return view('appointments.create', compact('departments', 'doctors'));
-    // }
 
     public function create()
     {
