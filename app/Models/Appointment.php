@@ -34,6 +34,11 @@ class Appointment extends Model
     //     'duration_minutes' => 'integer'
     // ];
 
+    public function hospital()
+    {
+        return $this->belongsTo(Hospital::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
