@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout :title="'Login'">
 
     <div class="container-fluid mt-2 min-vh-100 d-flex">
         <div class="row w-100">
