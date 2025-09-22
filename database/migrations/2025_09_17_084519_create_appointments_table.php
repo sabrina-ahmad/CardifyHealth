@@ -69,6 +69,7 @@ return new class extends Migration
         // Appointments table
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('hospital_id')->constrained('hospitals');
             $table->foreignId('patient_id')->constrained()->onDelete('cascade');
             $table->foreignId('doctor_id')->constrained()->onDelete('cascade');
             $table->foreignId('department_id')->constrained()->onDelete('cascade');
