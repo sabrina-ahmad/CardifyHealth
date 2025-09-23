@@ -103,13 +103,78 @@ class DoctorController extends Controller
     {
         $doctorId = auth('doctor')->user()->id;
 
+        $todaysAppointments = Appointment::where('doctor_id', $doctorId)
+            ->whereDate('appointment_date', today())
+            ->get();
+
+        $upcomingAppointments = Appointment::where('doctor_id', $doctorId)
+            ->whereDate('appointment_date', '>', today())
+            ->get();
+
+        $newPatients = Appointment::where('doctor_id', $doctorId)
+            ->where('status', 'new')
+            ->get();
+
+        $followUpPatients = Appointment::where('doctor_id', $doctorId)
+            ->where('medical_condition', 'Follow-up Visit')
+            ->get();
+
+        $emergencyCases = Appointment::where('doctor_id', $doctorId)
+            ->where('status', 'emergency')
+            ->get();
+
+        $recentActivity = Appointment::where('doctor_id', $doctorId)
+            ->orderBy('updated_at', 'desc')
+            ->take(10)
+            ->get();
+
+
+        $activeCases = Appointment::where('doctor_id', $doctorId)
+            ->whereIn('status', ['active', 'pending'])
+            ->get();
+
+        $pendingAppointments = Appointment::where('doctor_id', $doctorId)
+            ->where('status', 'pending')
+            ->get();
+
+        $completedAppointments = Appointment::where('doctor_id', $doctorId)
+            ->where('status', 'completed')
+            ->get();
+
+        $cancelledAppointments = Appointment::where('doctor_id', $doctorId)
+            ->where('status', 'cancelled')
+            ->get();
+
+        return view('doctor.dashboard', compact(
+            'todaysAppointments',
+            'upcomingAppointments',
+            'newPatients',
+            'followUpPatients',
+            'emergencyCases',
+            'recentActivity',
+            'activeCases',
+            'pendingAppointments',
+            'completedAppointments',
+            'cancelledAppointments',
+        ));
+        // $doctorId = auth('doctor')->user()->id;
+        //
+        // $appointments = Appointment::where('doctor_id', $doctorId);
+        //
+        // return view('doctor.dashboard', compact(
+        //     'appointments'
+        //     // 'todaysAppointments',
+        //     // 'upcomingAppointments',
+        //     // 'newPatients',
+        //     // 'followUpPatients',
+        //     // 'emergencyCases',
+        //     // 'recentActivity'
+        // ));
+
         // Today's appointments
-        $todaysAppointments = DoctorController::getTodaysAppointments();
-        // Upcoming appointments
-        $upcomingAppointments = DoctorController::getUpcomingAppointments();
-
-        $appointments = Appointment::where('doctor_id', $doctorId);
-
+        // $todaysAppointments = DoctorController::getTodaysAppointments();
+        // // Upcoming appointments
+        // $upcomingAppointments = DoctorController::getUpcomingAppointments();
         // Patient statistics
         // $newPatients = $doctor->patients()->where('first_visit', true)->count();
         // $followUpPatients = $doctor->patients()->where('first_visit', false)->count();
@@ -123,41 +188,32 @@ class DoctorController extends Controller
         //     ->take(5)
         //     ->get();
 
-        return view('doctor.dashboard', compact(
-            'appointments'
-            // 'todaysAppointments',
-            // 'upcomingAppointments',
-            // 'newPatients',
-            // 'followUpPatients',
-            // 'emergencyCases',
-            // 'recentActivity'
-        ));
     }
 
-    // In your controller
-    public function getTodaysAppointments()
-    {
-        $doctor = auth()->user();
-
-
-        if (!$doctor) {
-            return response()->json(['message' => 'Doctor not found'], 404);
-        }
-
-        return $doctor->appointment()->whereDate('scheduled_at', today())->get();
-    }
-
-    public function getUpcomingAppointments()
-    {
-        $doctor = auth()->user();
-
-        if (!$doctor) {
-            return response()->json(['message' => 'Doctor not found'], 404);
-        }
-
-        return $doctor->appointment()
-            ->where('appointment_date', '>', today())
-            ->where('status', 'pending')
-        ;
-    }
+    // // In your controller
+    // public function getTodaysAppointments()
+    // {
+    //     $doctor = auth()->user();
+    //
+    //
+    //     if (!$doctor) {
+    //         return response()->json(['message' => 'Doctor not found'], 404);
+    //     }
+    //
+    //     return $doctor->appointment()->whereDate('scheduled_at', today())->get();
+    // }
+    //
+    // public function getUpcomingAppointments()
+    // {
+    //     $doctor = auth()->user();
+    //
+    //     if (!$doctor) {
+    //         return response()->json(['message' => 'Doctor not found'], 404);
+    //     }
+    //
+    //     return $doctor->appointment()
+    //         ->where('appointment_date', '>', today())
+    //         ->where('status', 'pending')
+    //     ;
+    // }
 }

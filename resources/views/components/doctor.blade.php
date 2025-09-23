@@ -14,7 +14,10 @@
 
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <a class="navbar-brand" href="{{ route('doctor.dashboard') }}">Doctor Dashboard</a>
+        <a class="navbar-brand" href="#
+                ">
+            <!-- route('doctor.dashboard') -->
+            Doctor Dashboard</a>
         <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#">
             <i class="fas fa-bars"></i>
         </button>
@@ -34,10 +37,19 @@
                     <i class="fas fa-user fa-fw"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="{{ route('doctor.profile') }}">Profile</a>
-                    <a class="dropdown-item" href="{{ route('doctor.settings') }}">Settings</a>
+                    <a class="dropdown-item" href="#
+                            ">
+                        <!-- route('doctor.profile')  -->
+                        Profile</a>
+                    <a class="dropdown-item" href="#">
+
+                        <!-- route('doctor.settings') -->
+                        ">Settings</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{ route('logout') }}"
+                    <a class="dropdown-item"
+                        href="
+                            route('logout')
+                            "
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         Logout
                     </a>
@@ -62,20 +74,20 @@
                             Dashboard
                         </a>
                         <div class="sb-sidenav-menu-heading">Patients</div>
-                        <a class="nav-link" href="{{ route('doctor.patients') }}">
+                        <a class="nav-link" href="{{ route('doctor.dashboard') }}">
                             <div class="sb-nav-link-icon">
                                 <i class="fas fa-user"></i>
                             </div>
                             My Patients
                         </a>
-                        <a class="nav-link" href="{{ route('doctor.appointments') }}">
+                        <a class="nav-link" href="{{ route('doctor.dashboard') }}">
                             <div class="sb-nav-link-icon">
                                 <i class="fas fa-calendar"></i>
                             </div>
                             Appointments
                         </a>
                         <div class="sb-sidenav-menu-heading">Reports</div>
-                        <a class="nav-link" href="{{ route('doctor.reports') }}">
+                        <a class="nav-link" href="{{ route('doctor.dashboard') }}">
                             <div class="sb-nav-link-icon">
                                 <i class="fas fa-chart-area"></i>
                             </div>
