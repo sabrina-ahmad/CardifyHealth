@@ -29,6 +29,12 @@ class Appointment extends Model
         'status',
     ];
 
+    protected $dates = ['appointment_date'];
+
+    protected $casts = [
+        'appointment_date' => 'datetime',
+    ];
+
     // protected $casts = [
     //     'date_time' => 'datetime',
     //     'duration_minutes' => 'integer'
@@ -37,6 +43,11 @@ class Appointment extends Model
     public function hospital()
     {
         return $this->belongsTo(Hospital::class);
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
     }
 
     public function user()

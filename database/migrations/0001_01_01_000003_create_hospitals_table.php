@@ -27,6 +27,9 @@ return new class extends Migration
             $table->boolean('first_time');
             $table->string('address')->nullable(); // add directly here
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
+            // $table->integer('department_count')->nullable();
+            // $table->integer('appointment_count')->nullable();
+            // $table->integer('doctor_count')->nullable();
             $table->timestamps();
         });
 

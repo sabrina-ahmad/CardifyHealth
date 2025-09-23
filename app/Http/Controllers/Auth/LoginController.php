@@ -7,7 +7,7 @@ use App\Models\Hospital;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
-
+use App\Models\Doctor;
 use Illuminate\Http\Request;
 
 
@@ -94,6 +94,38 @@ class LoginController extends Controller
 
             return redirect()->route('hospital.dashboard');
         }
+
+        $doctor = Doctor::where('email', $credentials['email'])->first();
+
+        if ($doctor && Hash::check($credentials['password'], $doctor->password)) {
+            // dd($doctor, Hash::check($request->password, $doctor->password), $request->password, $doctor->password, Hash::make($request->password));
+
+            Auth::login($doctor, $request->filled('remember'));
+            // $request->session()->put('doctor_id', $doctor->id);
+            return redirect()->intended(route('doctor.dashboard'));
+        } else {
+            return back()->withErrors(["error" => "something went wrong!"]);
+        }
+
+        // $doctor = Doctor::where('email', $request->email)->first();
+        // if ($doctor && Hash::check($request->password, $doctor->password)) {
+        //
+        //     // if ($doctor->department->hospital->status === 'pending') {
+        //     //     return back()->withErrors([
+        //     //         'email' => 'Your hospital admin is pending approval.',
+        //     //     ]);
+        //     // } elseif ($doctor->department->hospital->status === 'rejected') {
+        //     //     return back()->withErrors([
+        //     //         'email' => 'Your hospital admin is regected contact us.'
+        //     //     ]);
+        //     // }
+        //
+        //     // Auth::login($doctor , $request->filled('remember'));
+        //     Auth::guard('doctor')->login($doctor, $request->filled('remember'));
+        //
+        //
+        //     return redirect()->route('doctor.dashboard');
+        // }
 
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',

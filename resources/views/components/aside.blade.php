@@ -22,8 +22,13 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#Doctors" class="nav-link align-middle px-0" data-content="doctors">
+                <a href="{{ route('admin.doctors') }}" class="nav-link align-middle px-0" data-content="doctors">
                     <i class="fs-4 bi-person"></i> <span class="ms-1 d-none d-sm-inline"> Doctors</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.departments') }}" class="nav-link align-middle px-0" data-content="doctors">
+                    <i class="bi bi-building-add"></i> <span class="ms-1 d-none d-sm-inline"> Departments</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -40,41 +45,5 @@
             </li>
 
         </ul>
-        <hr>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                Dropdown button
-            </button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-        </div>
-        <div class="dropdown pb-4">
-            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-                id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30"
-                    class="rounded-circle">
-                <span class="d-none d-sm-inline mx-1">loser</span>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                <li><a class="dropdown-item" href="#">New project...</a></li>
-                <li><a class="dropdown-item" href="#">Settings</a></li>
-                <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li>
-                    <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="#">Sign out</a></li>
-
-                <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                    @csrf
-                    <li>
-                        <button type="submit" class="dropdown-item">Logout</button>
-                    </li>
-                </form>
-            </ul>
-        </div>
     </div>
 </div>

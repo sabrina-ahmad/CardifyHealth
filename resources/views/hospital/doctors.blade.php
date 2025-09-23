@@ -37,13 +37,10 @@
 
                                     <div class="col-sm-6 mb-3">
                                         <label for="specialty" class="form-label">Specialty</label>
-                                        <select name="specialty" class="form-select" id="specialty" required>
-                                            <option value="">Select Specialty</option>
-                                            <option value="cardiology">Cardiology</option>
-                                            <option value="neurology">Neurology</option>
-                                            <option value="pediatrics">Pediatrics</option>
-                                        </select>
+                                        <input type="text" name="specialty" class="form-control" id="specialty"
+                                            required>
                                     </div>
+
                                     <div class="col-sm-6 mb-3">
                                         <label for="department" class="form-label">Department</label>
                                         <select name="department_id" class="form-select" id="department" required>

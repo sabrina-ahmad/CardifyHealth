@@ -6,14 +6,6 @@
                 <div id="content-hospitals active" class=" ">
 
                     <h2>Pending Hospital Approvals</h2>
-
-                    @if (session('success'))
-                        <div class="alert alert-success">{{ session('success') }}</div>
-                    @endif
-                    @if (session('error'))
-                        <div class="alert alert-danger">{{ session('error') }}</div>
-                    @endif
-
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover">
                             <thead>
@@ -46,7 +38,7 @@
                                                 <button class="btn btn-success btn-sm">More</button>
                                             </form>
                                             <form method="POST"
-                                                action="{{ route('admin.hospitals.reject', $hospital->id) }}"
+                                                action="{{ route('admin.hospitals.delete', $hospital->id) }}"
                                                 style="display:inline;">
                                                 @csrf
                                                 <button class="btn btn-danger btn-sm">Delete</button>

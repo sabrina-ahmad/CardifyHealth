@@ -10,9 +10,11 @@ use MongoDB\Laravel\Auth\User as Authenticatable;
 use MongoDB\Laravel\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 
-class Doctor extends Model
+
+class Doctor extends Authenticatable
 {
-    use HybridRelations;
+    // Remove HybridRelations trait
+    use DocumentModel, Notifiable;
 
     protected $connection = 'mongodb';
     protected $collection = 'doctors';
@@ -23,6 +25,7 @@ class Doctor extends Model
         'specialty',
         'department_id',
         'hospital_id',
+        'password'
         // 'available_hours',
         // 'max_appointments_per_day'
     ];
@@ -35,6 +38,11 @@ class Doctor extends Model
     public function department()
     {
         return $this->belongsTo(Department::class);
+    }
+
+    public function hospital()
+    {
+        return $this->belongsTo(Hospital::class);
     }
 
     public function appointments()

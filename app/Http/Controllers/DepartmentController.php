@@ -23,7 +23,7 @@ class DepartmentController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|unique:departments,name',
+            'name' => 'required|string',
             'description' => 'required|string',
             'hospital_id' => 'required|exists:hospitals,id',
         ]);
@@ -52,7 +52,7 @@ class DepartmentController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'name' => 'required|string|unique:departments,name,' . $id,
+            'name' => 'required|string',
             'description' => 'required|string'
         ]);
 
@@ -80,5 +80,21 @@ class DepartmentController extends Controller
 
         return redirect()->route('departments.index')
             ->with('success', 'Department deleted successfully!');
+    }
+
+    public function departments()
+    {
+        $departments = Department::orderBy('name')
+            ->get();
+
+        return view('admin.department', compact('departments'));
+    }
+
+    public function destroyDepartment($id)
+    {
+        $department = Department::findOrFail($id);
+        $department->delete();
+
+        return back()->with('error', 'Department deleted successfully.');
     }
 }

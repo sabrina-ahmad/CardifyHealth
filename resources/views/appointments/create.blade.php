@@ -5,9 +5,6 @@
         <div class="container mb-5 py-5">
             <main>
 
-                @if (session('success'))
-                    <div class="alert alert-success">{{ session('success') }}</div>
-                @endif
                 <div class="notify-container" id="notifyContainer">
                 </div>
 
@@ -25,7 +22,7 @@
                                 <div class="card-body">
                                     <!-- User Information -->
                                     <h5 class="card-title">{{ Auth::user()->fullname }}</h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">Software Developer</h6>
+                                    <!-- <h6 class="card-subtitle mb-2 text-muted">Software Developer</h6> -->
 
                                     <!-- Contact Information -->
                                     <ul class="list-group list-group-flush">
@@ -43,7 +40,8 @@
 
                                     <!-- Action Buttons -->
                                     <div class="mt-3">
-                                        <button class="btn btn-primary me-2">Edit Profile</button>
+                                        <a href="{{ route('patient.profile.settings') }}"
+                                            class="btn btn-primary me-2">Edit Profile</a>
                                         <button class="btn btn-outline-secondary">View Details</button>
                                     </div>
                                 </div>
@@ -147,23 +145,28 @@
                                     <select name="medical_condition" class="form-select" id="medicalCondition"
                                         required>
                                         <option value="">Select Condition</option>
-                                        <option>General Checkup</option>
-                                        <option>Symptom Evaluation</option>
-                                        <option>Follow-up Visit</option>
-                                        <option>Other</option>
+                                        @foreach (['General Checkup', 'Symptom Evaluation', 'Follow-up Visit', 'Other'] as $condition)
+                                            <option value="{{ $condition }}"
+                                                {{ old('medical_condition') == $condition ? 'selected' : '' }}>
+                                                {{ $condition }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                     <div class="invalid-feedback">
                                         Please select a medical condition
                                     </div>
                                 </div>
 
+                                <!-- Department/Specialist -->
                                 <div class="col-md-4 mb-3">
                                     <label for="department" class="form-label">Department/Specialist</label>
                                     <select name="department_id" class="form-select" id="department" required>
                                         <option value="">Select Department/Specialist</option>
-                                        @foreach ($doctors as $doc)
-                                            <option value="{{ $doc->department->id }}">{{ $doc->department->name }} -
-                                                Dr. {{ $doc->name }}</option>
+                                        @foreach ($hospital->department as $department)
+                                            <option value="{{ $department->id }}"
+                                                {{ old('department_id') == $department->id ? 'selected' : '' }}>
+                                                {{ $department->name }}
+                                            </option>
                                         @endforeach
                                     </select>
                                     <div class="invalid-feedback">
@@ -171,13 +174,16 @@
                                     </div>
                                 </div>
 
+                                <!-- Preferred Doctor -->
                                 <div class="col-md-4 mb-3">
                                     <label for="preferredDoctor" class="form-label">Preferred Doctor</label>
                                     <select name="doctor_id" class="form-select" id="preferredDoctor" required>
                                         <option value="">Select Doctor</option>
-                                        @foreach ($doctors as $doc)
-                                            <option value="{{ $doc->id }}">{{ $doc->department->name }} - Dr.
-                                                {{ $doc->name }}</option>
+                                        @foreach ($hospital->doctor as $doc)
+                                            <option value="{{ $doc->id }}"
+                                                {{ old('doctor_id') == $doc->id ? 'selected' : '' }}>
+                                                Dr. {{ $doc->name }} - {{ $doc->department->name }}
+                                            </option>
                                         @endforeach
                                     </select>
                                     <div class="invalid-feedback">
@@ -185,29 +191,35 @@
                                     </div>
                                 </div>
 
+                                <!-- Reason for Visit -->
                                 <div class="col-md-12 mb-3">
                                     <label for="reasonVisit" class="form-label">Reason for Visit</label>
                                     <span class="text-body-secondary">(Optional)</span>
                                     <textarea name="reason_for_visit" class="form-control" id="reasonVisit" rows="3"
-                                        placeholder="Please describe your symptoms or reason for visit..."></textarea>
+                                        placeholder="Please describe your symptoms or reason for visit...">{{ old('reason_for_visit') }}</textarea>
                                 </div>
+
+                                <!-- Appointment Details -->
                                 <h4 class="mb-3 py-1 border-3 border-primary border-bottom">Appointment Details</h4>
 
+                                <!-- Date -->
                                 <div class="col-md-6 mb-3">
                                     <label for="appointmentDate" class="form-label">Preferred Date</label>
                                     <input name="appointment_date" type="date" class="form-control"
-                                        id="appointmentDate" min="{{ date('Y-m-d') }}" required>
+                                        id="appointmentDate" value="{{ old('appointment_date') }}"
+                                        min="{{ date('Y-m-d') }}" required>
                                     <div class="invalid-feedback">
                                         Please select a valid date
                                     </div>
                                 </div>
 
+                                <!-- Time -->
                                 <div class="col-md-6 mb-3">
                                     <label for="appointmentTime" class="form-label">Preferred Time</label>
                                     <input name="appointment_time" type="time" class="form-control"
-                                        id="appointmentTime" required>
+                                        id="appointmentTime" value="{{ old('appointment_time') }}" required>
                                     <div class="invalid-feedback">
-                                        Please select a valid date
+                                        Please select a valid time
                                     </div>
                                 </div>
 
@@ -296,11 +308,52 @@
             </main>
 
         </div>
-        <script>
-            // showToast("Passwords are valid and match!", "error", 3000);
-            // showToast("Passwords are valid and match!", "success", 4000);
-            // showToast("Passwords are valid and match!", "info", 5000);
-        </script>
+        <script src="{{ asset('js/toast.js') }}"></script>
+
+        @if (session('success'))
+            <div class="notify-container" id="notifyContainer">
+            </div>
+            <script>
+                // showToast("{{ session('success') }}", "info")
+                showNotify(
+                    "<i class='bi bi-check-circle-fill text-white'></i> <span class='text-white'>{{ session('success') }}<span>",
+                    'info', 5000)
+            </script>
+        @endif
+
+
+        @if (session('error'))
+            <div class="notify-container" id="notifyContainer">
+            </div>
+            <script>
+                // showToast("{{ session('error') }}", "error")
+                showNotify("<i class='bi bi-x-circle text-dark'></i> <span class='text-dark'>{{ session('error') }}<span>",
+                    'error', 5000)
+            </script>
+        @endif
+
+        @if (session('warning'))
+            <div class="notify-container" id="notifyContainer">
+            </div>
+            <script>
+                // showToast("{{ session('warning') }}", "warning")
+                showNotify(
+                    "<i class='bi bi-exclamation-circle-fill text-dark'></i> <span class='text-dark'>{{ session('warning') }}<span>",
+                    'warning', 5000)
+            </script>
+        @endif
+
+        @if ($errors->any())
+            <div class="notify-container" id="notifyContainer">
+            </div>
+
+            <script>
+                showNotify(
+                    "<strong>Error!</strong> <br> <ul> @foreach ($errors->all() as $error) <li>{{ $error }}</li> @endforeach </ul>",
+                    "error", 5000)
+            </script>
+        @endif
+
     </div>
 
 </x-layout>

@@ -108,6 +108,51 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
     </script>
+    <script src="{{ asset('js/toast.js') }}"></script>
+
+    @if (session('success'))
+        <div class="notify-container" id="notifyContainer">
+        </div>
+        <script>
+            // showToast("{{ session('success') }}", "info")
+            showNotify(
+                "<i class='bi bi-check-circle-fill text-white'></i> <span class='text-white'>{{ session('success') }}<span>",
+                'info', 5000)
+        </script>
+    @endif
+
+
+    @if (session('error'))
+        <div class="notify-container" id="notifyContainer">
+        </div>
+        <script>
+            // showToast("{{ session('error') }}", "error")
+            showNotify("<i class='bi bi-x-circle text-dark'></i> <span class='text-dark'>{{ session('error') }}<span>",
+                'error', 5000)
+        </script>
+    @endif
+
+    @if (session('warning'))
+        <div class="notify-container" id="notifyContainer">
+        </div>
+        <script>
+            // showToast("{{ session('warning') }}", "warning")
+            showNotify(
+                "<i class='bi bi-exclamation-circle-fill text-dark'></i> <span class='text-dark'>{{ session('warning') }}<span>",
+                'warning', 5000)
+        </script>
+    @endif
+
+    @if ($errors->any())
+        <div class="notify-container" id="notifyContainer">
+        </div>
+
+        <script>
+            showNotify(
+                "<strong>Error!</strong> <br> <ul> @foreach ($errors->all() as $error) <li>{{ $error }}</li> @endforeach </ul>",
+                "error", 5000)
+        </script>
+    @endif
 
 
     {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>

@@ -22,9 +22,10 @@ class AppointmentController extends Controller
 
     public function create()
     {
-        $departments = Department::all();
-        $doctors = Doctor::all();
-        return view("appointments.create", compact('departments', 'doctors'));
+        $hospital_id = request()->get('hospital_id');
+        $hospital = Hospital::findOrFail($hospital_id);
+
+        return view("appointments.create", compact('hospital'));
     }
 
     public function store(Request $request)
@@ -40,30 +41,31 @@ class AppointmentController extends Controller
             'status' => 'nullable|in:pending,completed,cancelled', // optional status input
         ]);
 
+        $appointmentDateTime = new \DateTime($validated['appointment_date'] . ' ' . $validated['appointment_time']);
 
-        // Check for appointment conflict: Same doctor, same date and time
-        $existingAppointment = Appointment::where('doctor_id', $validated['doctor_id'])
-            ->whereDate('appointment_date', $validated['appointment_date'])
-            ->whereTime('appointment_time', $validated['appointment_time'])
-            ->exists();
+        $existingAppointment = Appointment::where('doctor_id', $validated['doctor_id'])->where('appointment_date', $appointmentDateTime)->exists();
 
         if ($existingAppointment) {
             return back()->withErrors(['appointment_time' => 'This doctor already has an appointment at this time.']);
         }
 
-        // Create the appointment record if no conflict exists
-        $appointment = Appointment::create([
-            'patient_id' => $validated['patient_id'],
-            'doctor_id' => $validated['doctor_id'],
-            'department_id' => $validated['department_id'],
-            'medical_condition' => $validated['medical_condition'],
-            'appointment_date' => $validated['appointment_date'],
-            'appointment_time' => $validated['appointment_time'],
-            'reason_for_visit' => $validated['reason_for_visit'] ?? null,
-            'status' => 'pending',  // Default status if not provided
-        ]);
 
-        return redirect()->route('dashboard')->with('success', 'Appointment successfully created!');
+        // Create the appointment record if no conflict exists
+        $appointment = new Appointment();
+        $appointment->patient_id = $validated['patient_id'];
+        $appointment->doctor_id = $validated['doctor_id'];
+        $appointment->department_id = $validated['department_id'];
+        $appointment->medical_condition = $validated['medical_condition'];
+        $appointment->appointment_date = $appointmentDateTime;
+        $appointment->reason_for_visit = $validated['reason_for_visit'] ?? null;
+        $appointment->status = $validated['status'] ?? 'pending';
+
+        // Save the appointment
+        $appointment->save();
+
+        // Return success response
+        return redirect()->route('myAppointments')
+            ->with('success', 'Appointment created successfully!');
     }
 
     public function show($id)
@@ -108,5 +110,28 @@ class AppointmentController extends Controller
 
         return redirect()->route('appointments.index')
             ->with('success', 'Appointment cancelled!');
+    }
+
+    public function myAppointments()
+    {
+        $appointments = Appointment::where('patient_id', auth()->user()->_id)
+            ->orderBy('appointment_date', 'desc')
+            ->get();
+
+        return view('patient.myappointments', compact('appointments'));
+    }
+
+    public function cancel(Request $request, Appointment $appointment)
+    {
+        if ($appointment->status !== 'pending') {
+            return back()->withErrors(['status' => 'Only pending appointments can be cancelled.']);
+        }
+
+        $appointment->update([
+            'status' => 'cancelled',
+            'cancelled_at' => now()
+        ]);
+
+        return back()->with('success', 'Appointment has been cancelled successfully.');
     }
 }

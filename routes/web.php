@@ -19,17 +19,13 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('/service', function () {
-    return view('pages.service');
-});
-
-Route::get('/contact', function () {
-    return view('pages.contact');
-});
+Route::get('/FAQs', function () {
+    return view('pages.FAQs');
+})->name('FAQs');
 
 Route::get('/about', function () {
     return view('pages.about');
-});
+})->name('about');
 
 Route::get('/register', function () {
     return view('auth.register');
@@ -51,6 +47,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/hospitals/waitlist', [HospitalApprovalController::class, 'pending'])->name('admin.waitlist');
     Route::post('/hospitals/{id}/approve', [HospitalApprovalController::class, 'approve'])->name('admin.hospitals.approve');
     Route::post('/hospitals/{id}/reject', [HospitalApprovalController::class, 'reject'])->name('admin.hospitals.reject');
+    Route::post('/hospitals/{id}/delete', [HospitalApprovalController::class, 'destroy'])->name('admin.hospitals.delete');
+    Route::get('/doctors', [HospitalApprovalController::class, 'doctors'])->name('admin.doctors');
+    Route::post('/doctors/{id}/delete', [HospitalApprovalController::class, 'destroyDoctor'])->name('admin.doctor.delete');
+    Route::get('/departments', [DepartmentController::class, 'departments'])->name('admin.departments');
+    Route::post('/departments/{id}/delete', [DepartmentController::class, 'destroyDepartment'])->name('admin.department.delete');
 });
 
 Route::middleware(['auth:hospital'])->group(function () {
@@ -74,10 +75,16 @@ Route::middleware(['auth:hospital'])->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [DashboardController::class, 'profile'])->name('patient.profile.settings');
     Route::put('/profile/update', [PatientRegisterController::class, 'updateProfile'])->name('patient.updateProfile');
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::put('/profile/update/username', [PatientRegisterController::class, 'updateUsername'])->name('patient.updateUsername');
+    Route::delete('/profile/delete', [PatientRegisterController::class, 'destroy'])->name('patient.delete');
+    Route::get('/dashboard', [DashboardController::class, 'search'])->name('dashboard');
     Route::get('/appointments/create', [AppointmentController::class, 'create'])->name('appointments.create');
+    Route::get('/appointments/index', [AppointmentController::class, 'index'])->name('appointments.index');
     Route::post('/appointments/create/', [AppointmentController::class, 'store'])->name('appointments.create.new');
-
+    Route::get('/my-appointments', [AppointmentController::class, 'myAppointments'])
+        ->name('myAppointments');
+    Route::put('/appointments/{appointment}/cancel', [AppointmentController::class, 'cancel'])
+        ->name('appointments.cancel');
 
     Route::get('/profile/export-users/excel', [PatientExportController::class, 'export'])->name('patient.export.excel');
     // Route::get('/appointments/create', [AppointmentController::class, 'index'])->name('appointments.create');
@@ -89,4 +96,9 @@ Route::middleware('auth')->group(function () {
     // Appointment Routes
     // Route::resource('appointments', AppointmentController::class);
     // Route::resource('appointments', AppointmentController::class);
+});
+Route::get('/test', [DashboardController::class, 'test'])->name('test');
+Route::middleware(['auth:doctor'])->group(function () {
+    Route::get('/doctor/dashboard', [DoctorController::class, 'dashboard'])->name('doctor.dashboard');
+    Route::get('/doctors/appointments', [DoctorController::class, 'getTodaysAppointments']);
 });

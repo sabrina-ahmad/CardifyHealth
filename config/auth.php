@@ -53,6 +53,12 @@ return [
             'driver' => 'session',
             'provider' => 'patients',
         ],
+
+        'doctor' => [
+            'driver' => 'session',
+            'provider' => 'doctors',
+        ],
+
     ],
 
     /*
@@ -85,6 +91,11 @@ return [
         'hospitals' => [
             'driver' => 'eloquent',
             'model' => App\Models\Hospital::class,
+        ],
+
+        'doctors' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Doctor::class,
         ],
         // 'users' => [
         //     'driver' => 'database',

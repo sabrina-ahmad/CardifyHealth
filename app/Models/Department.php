@@ -20,10 +20,16 @@ class Department extends Model
         'name',
         'description',
         'hospital_id',
+        'doctor_id',
     ];
 
     public function doctors()
     {
         return $this->hasMany(Doctor::class);
+    }
+
+    public function hospital()
+    {
+        return $this->hasMany(Department::class);
     }
 }
