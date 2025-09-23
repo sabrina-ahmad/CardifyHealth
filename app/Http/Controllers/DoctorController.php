@@ -139,6 +139,7 @@ class DoctorController extends Controller
     {
         $doctor = auth()->user();
 
+
         if (!$doctor) {
             return response()->json(['message' => 'Doctor not found'], 404);
         }
