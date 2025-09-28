@@ -19,7 +19,7 @@
                     <form action="{{ route('departments.store') }}" method="POST">
                         @csrf
 
-                        <input class="d-none" name="hospital_id" value="{{ $authUser->id }}" type="password">
+                        <input class="d-none" name="hospital_id" value="{{ $authUser->id }}" type="text">
                         <div class="mb-3">
                             <label for="inputName" class="form-label"><strong>Name:</strong></label>
                             <input type="text" name="name"

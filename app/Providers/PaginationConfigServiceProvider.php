@@ -18,7 +18,7 @@ class PaginationConfigServiceProvider extends ServiceProvider
         Config::set('pagination.per_page', 10);
 
         // Register pagination views
-        $this->loadViewsFrom(resource_path('views/vendor/pagination'), 'pagination');
+        // $this->loadViewsFrom(resource_path('views/vendor/pagination'), 'pagination');
     }
 
     public function register()

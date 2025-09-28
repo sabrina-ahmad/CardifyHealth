@@ -12,7 +12,42 @@ class HospitalDashboardController extends Controller
     public function index()
     {
         $hospital = Auth::user();
-        return view('hospital.dashboard', compact('hospital'));
+
+        $inactivityThreshold = now()->subDays(30);
+
+        $stats = [
+            'total_doctors' => $hospital->doctor->count(),
+            'total_departments' => $hospital->department->count(),
+            'active_doctors' => $hospital->doctor()
+                ->whereHas('appointments', function ($query) use ($inactivityThreshold) {
+                    $query->where('appointment_date', '>=', $inactivityThreshold);
+                })
+                ->count(),
+            'inactive_doctors' => $hospital->doctor()
+                ->whereDoesntHave('appointments', function ($query) use ($inactivityThreshold) {
+                    $query->where('appointment_date', '>=', $inactivityThreshold);
+                })
+                ->count()
+        ];
+
+        // Get data for charts
+        $doctorData = [
+            'labels' => ['Active', 'Inactive'],
+            'values' => [
+                $hospital->doctor()
+                    ->whereHas('appointments', function ($query) use ($inactivityThreshold) {
+                        $query->where('appointment_date', '>=', $inactivityThreshold);
+                    })
+                    ->count(),
+                $hospital->doctor()
+                    ->whereDoesntHave('appointments', function ($query) use ($inactivityThreshold) {
+                        $query->where('appointment_date', '>=', $inactivityThreshold);
+                    })
+                    ->count()
+            ]
+        ];
+
+        return view('hospital.dashboard', compact('hospital', 'stats', 'doctorData'));
     }
 
     public function doctors()

@@ -47,12 +47,14 @@
                             <h2 class="accordion-header" id="pharmacyHeader">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#pharmacy" aria-expanded="false" aria-controls="pharmacy">
-                                    Does the health center provide pharmacy services for patients?
+                                    Where can I find my account settings?
                                 </button>
                             </h2>
                             <div id="pharmacy" class="accordion-collapse collapse" aria-labelledby="pharmacyHeader">
                                 <div class="accordion-body">
-                                    Yes
+                                    You can access your account settings by clicking on the profile icon located on the
+                                    top right corner of the navigation bar. From there, you can manage your personal
+                                    information, update your Telebirr number, and adjust notification preferences.
                                 </div>
                             </div>
                         </div>
@@ -62,13 +64,16 @@
                             <h2 class="accordion-header" id="vaccinationHeader">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#vaccination" aria-expanded="false" aria-controls="vaccination">
-                                    Are vaccination services available at the health center?
+                                    What payment methods are supported?
                                 </button>
                             </h2>
                             <div id="vaccination" class="accordion-collapse collapse"
                                 aria-labelledby="vaccinationHeader">
                                 <div class="accordion-body">
-                                    Yes (available during morning hours)
+                                    Cardify Health currently supports payments through Telebirr. You can update or
+                                    change your Telebirr phone number in your account settings. Whenever you book a new
+                                    appointment, the system will remind you to verify or update your payment number if
+                                    needed.
                                 </div>
                             </div>
                         </div>
@@ -78,15 +83,76 @@
                             <h2 class="accordion-header" id="emergencyHeader">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#emergency" aria-expanded="false" aria-controls="emergency">
-                                    Does the health center have emergency services to handle urgent cases?
+                                    What should I do if I face booking issues?
                                 </button>
                             </h2>
                             <div id="emergency" class="accordion-collapse collapse" aria-labelledby="emergencyHeader">
                                 <div class="accordion-body">
-                                    Yes (ambulance service available)
+                                    If you encounter any problems while booking an appointment, please double-check that
+                                    all required fields are filled correctly. If the issue persists, Cardify will
+                                    display a helpful notification (toast message) guiding you on what to fix or change.
+                                    You can also contact our support team for further assistance.
                                 </div>
                             </div>
                         </div>
+
+                        <div class="accordion-item border rounded mb-2">
+                            <h2 class="accordion-header" id="hostpialreliableHeader">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#hostpialreliable" aria-expanded="false"
+                                    aria-controls="hostpialreliable">
+                                    How reliable are the hospitals listed on Cardify Health?
+                                </button>
+                            </h2>
+                            <div id="hostpialreliable" class="accordion-collapse collapse"
+                                aria-labelledby="hostpialreliable">
+                                <div class="accordion-body">
+                                    We only partner with verified and trusted hospitals. The hospitals shown on the
+                                    appointments page are actively available and are ranked based on current
+                                    availability and reliability to ensure the best service for our users.
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="accordion-item border rounded mb-2">
+                            <h2 class="accordion-header" id="appointmentEditHeader">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#appointmentEdit" aria-expanded="false"
+                                    aria-controls="appointmentEdit">
+                                    Can I reschedule or cancel my appointments?
+                                </button>
+                            </h2>
+                            <div id="appointmentEdit" class="accordion-collapse collapse"
+                                aria-labelledby="appointmentEdit">
+                                <div class="accordion-body">
+                                    Yes, you can reschedule or cancel any pending appointment directly from your
+                                    dashboard. Just go to your appointments section and select the option to modify or
+                                    delete the booking.
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="accordion-item border rounded mb-2">
+                            <h2 class="accordion-header" id="accidentalappointemntHeader">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#accidentalappointemnt" aria-expanded="false"
+                                    aria-controls="accidentalappointemnt">
+                                    What happens if I accidentally book two appointments at the same time?
+                                </button>
+                            </h2>
+                            <div id="accidentalappointemnt" class="accordion-collapse collapse"
+                                aria-labelledby="accidentalappointemnt">
+                                <div class="accordion-body">
+                                    Cardify Health automatically checks for overlapping appointments. If there's a time
+                                    conflict, you’ll receive an instant notification (toast alert) before confirming
+                                    your booking. This helps you avoid double-booking and gives you a chance to pick a
+                                    different time.
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

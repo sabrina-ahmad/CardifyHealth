@@ -1,4 +1,4 @@
-<x-layout :title="$hospital->hospital_name">
+<x-layout :title="'s'">
 
     <div class="bg-body-tertiary ">
 

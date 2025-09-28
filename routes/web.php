@@ -10,10 +10,17 @@ use App\Http\Controllers\HospitalDashboardController;
 use App\Http\Controllers\DashboardController;
 // use App\Http\Controllers\HospitalApprovalController;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\AdminSettingsController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Middleware\AdminMiddleware;
+
+use App\Http\Controllers\ExcelExportController;
+
+use App\Http\Controllers\PdfExportController;
+
+use App\Http\Controllers\SmsController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -52,6 +59,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::post('/doctors/{id}/delete', [HospitalApprovalController::class, 'destroyDoctor'])->name('admin.doctor.delete');
     Route::get('/departments', [DepartmentController::class, 'departments'])->name('admin.departments');
     Route::post('/departments/{id}/delete', [DepartmentController::class, 'destroyDepartment'])->name('admin.department.delete');
+    Route::get('/settings', [AdminSettingsController::class, 'index'])->name('admin.settings');
+    Route::post('/settings/update', [AdminSettingsController::class, 'createOrUpdate'])->name('admin.settings.change');
 });
 
 Route::middleware(['auth:hospital'])->group(function () {
@@ -85,8 +94,16 @@ Route::middleware('auth')->group(function () {
         ->name('myAppointments');
     Route::put('/appointments/{appointment}/cancel', [AppointmentController::class, 'cancel'])
         ->name('appointments.cancel');
+    Route::get('/appointments/{appointment}/edit', [AppointmentController::class, 'edit'])
+        ->name('appointments.edit');
 
-    Route::get('/profile/export-users/excel', [PatientExportController::class, 'export'])->name('patient.export.excel');
+    Route::put('/appointments/reappointment', [AppointmentController::class, 'reappointment'])
+        ->name('appointments.create.reappointment');
+
+    Route::get('/profile/export/excel', [ExcelExportController::class, 'exportUserAppointments'])->name('patient.export.excel');
+
+    Route::get('profile/export-users/pdf', [PdfExportController::class, 'generatePDF'])->name("export.pdf");
+
     // Route::get('/appointments/create', [AppointmentController::class, 'index'])->name('appointments.create');
     // Route::get('/appointments/{appointment}/confirm', [AppointmentController::class, 'confirm'])
     //     ->name('appointments.confirm');
@@ -97,8 +114,23 @@ Route::middleware('auth')->group(function () {
     // Route::resource('appointments', AppointmentController::class);
     // Route::resource('appointments', AppointmentController::class);
 });
+
 Route::get('/test', [DashboardController::class, 'test'])->name('test');
 Route::middleware(['auth:doctor'])->group(function () {
     Route::get('/doctor/dashboard', [DoctorController::class, 'dashboard'])->name('doctor.dashboard');
     Route::get('/doctors/appointments', [DoctorController::class, 'getTodaysAppointments']);
+    Route::put('/doctors/appointments/complete', [AppointmentController::class, 'complete'])
+        ->name('appointments.complete');
+
+    Route::get('/doctors/appointments/{appointment}/finish', [AppointmentController::class, 'finish'])
+        ->name('appointments.finish');
 });
+
+Route::get('/pdf', function () {
+    return view('pdf.example');
+});
+
+Route::get('/sms/send', [SmsController::class, 'sendSms']);
+Route::get('/sms/sent', [SmsController::class, 'getSentMessages']);
+Route::get('/sms/received', [SmsController::class, 'getReceivedMessages']);
+Route::get('/sms/pending', [SmsController::class, 'getPendingMessages']);

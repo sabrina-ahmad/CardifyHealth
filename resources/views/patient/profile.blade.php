@@ -17,7 +17,7 @@
                 <div class="card">
                     <div class="card-body">
                         <nav class="nav flex-column nav-pills nav-gap-y-1">
-                            <a href="#profile" data-bs-toggle="tab"
+                            <a href="#profile" data-bs-toggle="tab" data-bs-target="#profile"
                                 class="nav-item nav-link has-icon nav-link-faded active">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -207,6 +207,32 @@
                                     </div>
                                     <div class="mb-3 col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
+                                            <label for="address" class="form-label">Address</label>
+                                            <input type="text" name="address" class="form-control" id="address"
+                                                value="{{ $user->address }}" required="">
+                                            <div class="invalid-feedback">
+                                                Valid address is required.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="gender" class="form-label">Gender</label>
+                                            <select class="form-select" name="gender" aria-label="Default select example">
+                                                <option {{ $user->gender == null || $user->gender == "" ? 'selected' : ''}} value="">Select Gender</option>
+                                                <option {{ $user->gender == "M" ? 'selected' : ''}} value="M">Male</option>
+                                                <option {{ $user->gender == "F" ? 'selected' : ''}} value="F">Female</option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Valid birth date is required.
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="mb-3 col-lg-6 col-md-6 col-sm-12">
+                                        <div class="form-group">
 
                                             <label for="profile_image" class="form-label">Uploade Porfile
                                                 Image</label>
@@ -255,7 +281,7 @@
                                         back. Please be certain.</p>
                                 </div>
                             </form>
-                                <form action="{{ route('patient.delete') }}" method="post">
+                            <form action="{{ route('patient.delete') }}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-danger" type="submit">Delete Account</button>
@@ -387,13 +413,8 @@
                                         </button>
                                         <ul class="dropdown-menu">
                                             <a href="{{ route('patient.export.excel') }}"
-                                                class="dropdown-item"">Export
-                                                to Excel</a>
-                                            <li><a class="dropdown-item" href="#">CSV</a></li>
-                                            <li><a class="dropdown-item" href="#">PDF</a></li>
-                                            <li><a class="dropdown-item" onclick="downloadCard()"
-                                                    href="#">PNG</a>
-                                            </li>
+                                                class="dropdown-item"">Excel</a>
+                                            <li><a target="_blank" class="dropdown-item" href="{{ route('export.pdf') }}">PDF</a></li>
                                         </ul>
                                     </div>
 
@@ -403,8 +424,6 @@
                                             Download Card
                                         </button>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">CSV</a></li>
-                                            <li><a class="dropdown-item" href="#">PDF</a></li>
                                             <li><a class="dropdown-item" onclick="downloadCard()"
                                                     href="#">PNG</a>
                                             </li>
@@ -523,7 +542,9 @@
         </div>
         <script>
             // showToast("{{ session('success') }}", "info")
-            showNotify("<i class='bi bi-check-circle-fill text-white'></i> <span class='text-white'>{{session('success')}}<span>", 'info', 5000)
+            showNotify(
+                "<i class='bi bi-check-circle-fill text-white'></i> <span class='text-white'>{{ session('success') }}<span>",
+                'info', 5000)
         </script>
     @endif
 
@@ -533,7 +554,8 @@
         </div>
         <script>
             // showToast("{{ session('error') }}", "error")
-            showNotify("<i class='bi bi-x-circle text-dark'></i> <span class='text-dark'>{{session('error')}}<span>", 'error', 5000)
+            showNotify("<i class='bi bi-x-circle text-dark'></i> <span class='text-dark'>{{ session('error') }}<span>",
+                'error', 5000)
         </script>
     @endif
 
@@ -542,7 +564,9 @@
         </div>
         <script>
             // showToast("{{ session('warning') }}", "warning")
-            showNotify("<i class='bi bi-exclamation-circle-fill text-dark'></i> <span class='text-dark'>{{session('warning')}}<span>", 'warning', 5000)
+            showNotify(
+                "<i class='bi bi-exclamation-circle-fill text-dark'></i> <span class='text-dark'>{{ session('warning') }}<span>",
+                'warning', 5000)
         </script>
     @endif
 
@@ -556,4 +580,7 @@
                 "error", 5000)
         </script>
     @endif
+
+
+    <script src="{{ asset('js/default.js') }}"></script>
 </x-layout>

@@ -367,7 +367,7 @@
                         <div class="col-md-3">
                             <div class="card p-3">
                                 <h6>Revenue</h6>
-                                <div class="value text-success">$45.2K</div>
+                                <div class="value text-success">Br 45.2K</div>
                                 <small class="text-muted">+12% vs last month</small>
                             </div>
                         </div>

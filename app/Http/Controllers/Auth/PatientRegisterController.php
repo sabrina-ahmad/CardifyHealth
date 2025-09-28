@@ -7,20 +7,36 @@ use Illuminate\Http\Request;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class PatientRegisterController extends Controller
 {
     public function store(Request $request)
     {
         // Validate input
-        $request->validate([
-            'fullname' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:users,username',
-            'email' => 'required|string|email|max:255|unique:users,email',
-            'phone_number' => 'nullable|string|max:20',
-            // 'email' => 'required|string|email:rfc,dns|max:255|unique:users,email',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
+        // $validated = $request->validate([
+        //     'fullname' => 'required|string|max:255',
+        //     'username' => 'required|string|max:255|unique:users,username',
+        //     'email' => 'required|string|email|max:255|unique:users,email',
+        //     'phone_number' => 'nullable|string|max:20',
+        //     // 'email' => 'required|string|email:rfc,dns|max:255|unique:users,email',
+        //     'password' => 'required|string|min:8|confirmed',
+        // ]);
+
+        try {
+            $validated = $request->validate([
+                'fullname' => 'required|string|max:255',
+                'username' => 'required|string|max:255|unique:users,username',
+                'email' => 'required|string|email|max:255|unique:users,email',
+                'phone_number' => 'nullable|string|max:20',
+                'password' => 'required|string|min:8|confirmed',
+            ]);
+        } catch (ValidationException $e) {
+            return redirect()->back()
+                ->withErrors($e->validator)
+                ->withInput()
+                ->with('active_tab', $request->input('tab', 'patient')); // default tab if none provided
+        }
 
         // Create user
         $user = User::create([
@@ -49,6 +65,8 @@ class PatientRegisterController extends Controller
             'phone_number' => 'nullable|string|max:20',
             'dob' => 'nullable|date',
             'profile_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'address' => 'nullable',
+            'gender' => 'nullable',
         ]);
 
         $user = auth()->user(); // Get the authenticated user
@@ -66,6 +84,8 @@ class PatientRegisterController extends Controller
         $user->email = $request->input('email');
         $user->phone_number = $request->input('phone_number');
         $user->dob = $request->input('dob');
+        $user->address = $request->input('address');
+        $user->gender = $request->input('gender');
 
         // Save the changes
         $user->save();

@@ -25,11 +25,13 @@ return [
      * Package Service Providers...
      */
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Mccarlosen\LaravelMpdf\LaravelMpdfServiceProvider::class,
         App\Providers\PaginationConfigServiceProvider::class,
     ],
 
     'aliases' => [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'PDF' => Mccarlosen\LaravelMpdf\Facades\LaravelMpdf::class
     ],
 
     /*

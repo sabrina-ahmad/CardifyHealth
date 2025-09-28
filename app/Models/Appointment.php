@@ -19,7 +19,7 @@ class Appointment extends Model
     protected $collection = 'appointments';
 
     protected $fillable = [
-        'patient_id',
+        'user_id',
         'doctor_id',
         'department_id',
         'medical_condition',
@@ -27,6 +27,9 @@ class Appointment extends Model
         'appointment_time',
         'reason_for_visit',
         'status',
+        "report",
+        "paid",
+        "paymethod_amount",
     ];
 
     protected $dates = ['appointment_date'];

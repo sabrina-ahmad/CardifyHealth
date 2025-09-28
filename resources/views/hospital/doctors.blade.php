@@ -14,6 +14,10 @@
             <!-- Main Content Area -->
             <div class="container py-5 mt-5 col-8 col-sm-7 col-md-9 col-lg-10">
                 <section id="register" class="mx-3">
+
+                    <div class="bg-success px-3 py-2 text-dark bg-opacity-50 mb-4 rounded" role="alert">
+                        By Default the doctors password will be '12345678'
+                    </div>
                     <div class="card shadow mb-4">
                         <div class="card-header">
                             <h3 class="card-title">Register New Doctor</h3>
@@ -22,7 +26,7 @@
                             <form id="doctorRegisterForm" action="{{ route('hospital.doctors.register') }}"
                                 method="post">
                                 @csrf
-                                <input class="d-none" name="hospital_id" value="{{ $authUser->id }}" type="password">
+                                <input class="d-none" name="hospital_id" value="{{ $authUser->id }}" type="text">
                                 <div class="row g-3">
                                     <div class="col-sm-6 mb-3">
                                         <label for="doctorName" class="form-label">Doctor Name</label>

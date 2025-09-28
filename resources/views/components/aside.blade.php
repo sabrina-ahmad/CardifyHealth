@@ -43,6 +43,11 @@
                         Medical Records</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.settings') }}" class="nav-link align-middle px-0" data-content="settings">
+                    <i class="bi bi-gear"></i> <span class="ms-1 d-none d-sm-inline">Settings</span>
+                </a>
+            </li>
 
         </ul>
     </div>

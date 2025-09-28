@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Department;
+use App\Models\Doctor;
 use Illuminate\Http\Request;
 use App\Models\Hospital;
 
@@ -14,7 +16,29 @@ class AdminDashboardController extends Controller
 
         $hospitals = Hospital::where('status', 'pending')->get();
 
-        return view('admin.dashboard', compact('hospitals'));
+        $stats = [
+            'pending_hospitals' => Hospital::where('status', 'pending')->count(),
+            'active_hospitals' => Hospital::where('status', 'approved')->count(),
+            'total_doctors' => Doctor::count(),
+            'total_departments' => Department::count(),
+        ];
+
+
+        $hospitalData = [
+            'labels' => ['Pending', 'Active'],
+            'values' => [
+                Hospital::where('status', 'pending')->count(),
+                Hospital::where('status', 'approved')->count()
+            ]
+        ];
+
+        $doctorData = [
+            'labels' => ['Total Doctors'],
+            'values' => [Doctor::count()]
+        ];
+
+
+        return view('admin.dashboard', compact('stats', 'hospitals', 'hospitalData', 'doctorData'));
         // return view('admin.dashboard', compact('unverifiedHospitals'));
     }
 

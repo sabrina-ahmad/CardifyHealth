@@ -112,11 +112,23 @@ class DoctorController extends Controller
             ->get();
 
         $newPatients = Appointment::where('doctor_id', $doctorId)
-            ->where('status', 'new')
+            ->where('status', 'pending')
             ->get();
 
         $followUpPatients = Appointment::where('doctor_id', $doctorId)
             ->where('medical_condition', 'Follow-up Visit')
+            ->get();
+
+        $generalCheckup = Appointment::where('doctor_id', $doctorId)
+            ->where('medical_condition', 'General Checkup')
+            ->get();
+
+        $symptomEvaluation = Appointment::where('doctor_id', $doctorId)
+            ->where('medical_condition', 'Symptom Evaluation')
+            ->get();
+
+        $otherCheckup = Appointment::where('doctor_id', $doctorId)
+            ->where('medical_condition', 'Other')
             ->get();
 
         $emergencyCases = Appointment::where('doctor_id', $doctorId)
@@ -128,6 +140,7 @@ class DoctorController extends Controller
             ->take(10)
             ->get();
 
+        $appointments = Appointment::where('doctor_id', $doctorId)->orderBy('updated_at', 'desc')->get();
 
         $activeCases = Appointment::where('doctor_id', $doctorId)
             ->whereIn('status', ['active', 'pending'])
@@ -146,10 +159,14 @@ class DoctorController extends Controller
             ->get();
 
         return view('doctor.dashboard', compact(
+            'appointments',
             'todaysAppointments',
             'upcomingAppointments',
             'newPatients',
             'followUpPatients',
+            'generalCheckup',
+            'symptomEvaluation',
+            'otherCheckup',
             'emergencyCases',
             'recentActivity',
             'activeCases',

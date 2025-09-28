@@ -100,7 +100,7 @@ class LoginController extends Controller
         if ($doctor && Hash::check($credentials['password'], $doctor->password)) {
             // dd($doctor, Hash::check($request->password, $doctor->password), $request->password, $doctor->password, Hash::make($request->password));
 
-            Auth::guard('doctor')->login($doctor, $request->filled('remember'));
+            Auth::guard('doctor')->login($doctor, true);
 
             // $request->session()->put('doctor_id', $doctor->id);
             return redirect()->intended(route('doctor.dashboard'));
