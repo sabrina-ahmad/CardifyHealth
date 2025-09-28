@@ -6,10 +6,10 @@
                     <h1 class="display-4 fw-bold text-primary">Cardify Health</h1>
                     <h2 class="display-4 fw-bold text-body-emphasis">Connect. Care. Cure</h2>
                     <p class="lead mt-2 fw-normal text-secondary">
-                        Welcome to Cardify Health — where you can find the right doctor and book appointments instantly.
-                        Whether you need a general checkup, a specialist consultation, or urgent care, Cardify helps
-                        you find the right doctor closest to you.
-                    </p>
+                        Welcome to Cardify Health
+                        From routine checkups to specialist consultations and urgent care, Cardify makes it simple to
+                        find the right Health center and book appointments instantly. Whether at a nearby clinic or a
+                        leading hospital, Cardify connects you to quality healthcare, right when you need it. </p>
                     <div class="mt-5 mb-5">
                         <a href="{{ route('register') }}" class="btn btn-primary btn-lg px-4 me-sm-3">Get Started</a>
                         <a href="#Demo" class="btn btn-light btn-lg px-4 me-sm-3">Watch Demo</a>
